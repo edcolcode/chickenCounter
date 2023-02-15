@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "chickenCount.master.password",
+    "type": "java.lang.String",
+    "description": "Password of the root user"
+  },
+  {
+    "name": "chickenCount.app",
+    "type": "java.lang.String",
+    "description": "Address of the running application. Allows execute the application from another server like node. Useful when updating front-end application"
+  },
+  {
+    "name": "rsa.private-key",
+    "type": "java.lang.String",
+    "description": "Location of the private key file to generate the JWT tokens"
+  },
+  {
+    "name": "rsa.public-key",
+    "type": "java.lang.String",
+    "description": "Location of the public key file to generate the JWT tokens"
+  }
+]}
