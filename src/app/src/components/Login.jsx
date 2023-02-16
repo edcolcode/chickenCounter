@@ -60,8 +60,6 @@ const Login = () => {
         noValidate
       >
         <TextField
-          value="admin"
-
           margin="normal"
           required
           fullWidth
@@ -76,8 +74,6 @@ const Login = () => {
           helperText={errors.username?.message}
         />
         <TextField
-          value="admin*"
-          
           margin="normal"
           required
           fullWidth
