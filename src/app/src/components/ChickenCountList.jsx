@@ -87,10 +87,10 @@ const ChickenCountList = () => {
           deleteCB: () => deleteChickenCount({chickenCountId: id})
             .then((response) => {
               if (response.error) {
-                dispatch(addAlert(recordDeletedError));
+                return dispatch(addAlert(recordDeletedError));
               }
 
-              dispatch(addAlert(recordDeletedSuccessfully));
+              return dispatch(addAlert(recordDeletedSuccessfully));
             })
           }
       }
