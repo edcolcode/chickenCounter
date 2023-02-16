@@ -112,12 +112,12 @@
 				<executions>
 					<execution>
 						<id>copying-front-end-artifacts</id>
-						<phase>compile</phase>
+						<phase>process-classes</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${basedir}/src/main/resources/static</outputDirectory>
+							<outputDirectory>${basedir}/target/classes/static</outputDirectory>
 							<resources>
 								<resource>
 									<directory>${basedir}/src/app/build</directory>
