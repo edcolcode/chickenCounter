@@ -94,10 +94,12 @@ const Header = () => {
           'aria-labelledby': 'header-options-button'
         }}
       >
-        <MenuItem onClick={handleAddChickenCounterButtonClick}>
-          <ControlPointIcon sx={{mr: 1}}/>
-          Add Record
-        </MenuItem>
+        {isLoggedIn && 
+          <MenuItem onClick={handleAddChickenCounterButtonClick}>
+            <ControlPointIcon sx={{mr: 1}}/>
+            Add Record
+          </MenuItem>
+        }
         <Divider />
         {!isLoggedIn && 
           <MenuItem onClick={handleLoginButtonClick}>
@@ -113,14 +115,16 @@ const Header = () => {
     </nav>
   :
     <nav>
-      <IconButton
-        variant='contained'
-        color='secondary'
-        title='Add record'
-        onClick={handleAddChickenCounterButtonClick}
-      >
-        <ControlPointIcon/>
-      </IconButton>
+      {isLoggedIn && 
+        <IconButton
+          variant='contained'
+          color='secondary'
+          title='Add record'
+          onClick={handleAddChickenCounterButtonClick}
+        >
+          <ControlPointIcon/>
+        </IconButton>
+      }
       {!isLoggedIn && 
         <Button
           variant='contained'
