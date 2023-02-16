@@ -55,11 +55,20 @@ export const chickenCountsApi = baseApi.injectEndpoints({
         body
       }),
       invalidatesTags: ['ChickenCounts'] //[{type: 'ChickenCounts', id: 'LIST'}]
+    }),
+    // DELETE
+    deleteChickenCount: build.mutation({
+      query: ({chickenCountId}) => ({
+        url: `/${chickenCounts}/${chickenCountId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['ChickenCounts'] //[{type: 'ChickenCounts', id: 'LIST'}]
     })
   })
 });
 
 export const {
   useGetChickenCountsQuery,
-  useAddChickenCountMutation
+  useAddChickenCountMutation,
+  useDeleteChickenCountMutation,
 } = chickenCountsApi;
