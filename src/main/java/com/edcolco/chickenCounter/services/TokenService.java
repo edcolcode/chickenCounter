@@ -44,8 +44,8 @@ public class TokenService {
 				.collect(Collectors.joining(" "));
 
 		JwtClaimsSet claims = JwtClaimsSet.builder().issuer("self").issuedAt(now)
-//				.expiresAt(now.plus(15, ChronoUnit.MINUTES))
-				.expiresAt(now.plus(1, ChronoUnit.SECONDS)).subject(authentication.getName()).claim("scope", scope)
+				.expiresAt(now.plus(15, ChronoUnit.MINUTES))
+				.subject(authentication.getName()).claim("scope", scope)
 				.build();
 
 		return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
