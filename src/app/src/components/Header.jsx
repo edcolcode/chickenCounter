@@ -1,78 +1,38 @@
 import logo from '../chickenCountLogo.png';
-import navigation from '../utils/navigation';
-import { logOut, selectIsUserAuth } from '../store/slices/authSlice';
+import { useHeader } from '../utils/hooks/useHeader';
 
-import {useState, useEffect} from 'react';
 import { 
 	AppBar,
   Button,
 	Toolbar,
   IconButton,
 	Typography,
-  useMediaQuery,
   Menu,
   MenuItem,
   Divider,
 } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import {useNavigate} from 'react-router-dom';
 import styled from '@emotion/styled';
-import { useDispatch, useSelector } from 'react-redux';
+import { Box } from '@mui/system';
 
 const StyledLogoImg = styled.img`
-  
   max-height: 40px;
-  cursor: pointer;
-`;
-const StyledTypography = styled(Typography)`
   cursor: pointer;
 `;
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [menuAnchorEl, setMenuAnchorEl] = useState(null);
-  const isLoggedIn = useSelector(selectIsUserAuth);
-  
-  const isXSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-
-  useEffect(() => {
-    // Reset menu open flag
-    if (!isXSmallScreen && isMenuOpen) {
-      handleMenuClose();
-    }
-  }, [isXSmallScreen, isMenuOpen]);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleLogoClick = () => {
-    navigate(navigation.root);
-  };
-
-  const handleAddChickenCounterButtonClick = () => {
-    handleMenuClose();
-    navigate(navigation.addChickenCount);
-  };
-
-  const handleLoginButtonClick = () => {
-    handleMenuClose();
-    navigate(navigation.login);
-  };
-
-  const handleLogoutButtonClick = () => {
-    handleMenuClose();
-    dispatch(logOut());
-  };
-
-  const handleOptionsButtonClick = (event) => {
-    setMenuAnchorEl(event.currentTarget);
-    setIsMenuOpen(true);
-  };
-
-  const handleMenuClose = () => {
-    setMenuAnchorEl(null);
-    setIsMenuOpen(false);
-  };
+  const {
+    isMenuOpen,
+    isLoggedIn,
+    menuAnchorEl,
+    isXSmallScreen,
+    handleMenuClose,
+    handleLogoClick,
+    handleLoginButtonClick,
+    handleLogoutButtonClick,
+    handleOptionsButtonClick,
+    handleAddChickenCounterButtonClick
+  } = useHeader();
 
   const navMenu = isXSmallScreen
   ? 
@@ -155,16 +115,25 @@ const Header = () => {
           alt="Chicken Count"
           onClick={handleLogoClick}
         />
-        <StyledTypography
-            component="h1"
+        <Box
+          sx={{
+            flexGrow: 1, 
+            ml: 1
+          }}
+        >
+          <Typography
+            component="span"
             variant="h5"
             color="inherit"
             noWrap
-            sx={{flexGrow: 1, ml: 1}}
+            sx={{
+              cursor: 'pointer'
+            }}
             onClick={handleLogoClick}
-        >
+          >
             Chicken Counter
-        </StyledTypography>
+          </Typography>
+        </Box>
         {navMenu}
       </Toolbar>
     </AppBar>

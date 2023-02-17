@@ -1,50 +1,19 @@
-import { useGetTokenMutation } from '../store/slices/api/authSliceApi';
-import { addAlert } from '../store/slices/alertsSlice';
+import useLogin from '../utils/hooks/useLogin';
 
 import {
   Box,
   Button,
   TextField
 } from '@mui/material';
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-import navigation from '../utils/navigation';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { unknownError } from '../utils/alerts';
-
-const loginSchema = yup.object({
-  username: yup.string().required().default(''),
-  password: yup.string().required().default('')
-});
 
 const Login = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const {
-    register,
+    isLoading,
+    errors,
+    onSubmit,
     handleSubmit,
-    reset: resetForm,
-    formState: {errors}
-  } = useForm({
-    resolver: yupResolver(loginSchema)
-  });
-
-  const [getToken, {isLoading}] = useGetTokenMutation();
-
-  const onSubmit = (data) => {
-    getToken(data)
-      .then((response) => {
-        if (response.error) {
-          return;
-        }
-
-        resetForm();
-        navigate(navigation.root, {replace: true});
-      })
-      .catch(() => dispatch(addAlert(unknownError)));
-  };
+    register
+  } = useLogin();
 
   return (
   <Box
