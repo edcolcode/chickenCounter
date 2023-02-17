@@ -24,3 +24,13 @@ export const recordAddedSuccessfully = {
   type: ALERT_TYPES.success,
   message: 'Chicken count has been registered successfully.'
 };
+
+export const recordDeletedSuccessfully = {
+  type: ALERT_TYPES.success,
+  message: 'Chicken count has been deleted successfully.'
+};
+
+export const recordDeletedError = {
+  type: ALERT_TYPES.error,
+  message: 'Chicken count could not be deleted, try again.'
+};
