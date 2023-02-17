@@ -1,7 +1,4 @@
-import { useAddChickenCountMutation } from '../store/slices/api/chickenCounterSliceApi';
-import { addAlert } from '../store/slices/alertsSlice';
-import { recordAddedSuccessfully } from '../utils/alerts';
-import { useDispatch } from 'react-redux';
+import useAddChickenCount from '../utils/hooks/useAddChickenCount';
 
 import {
   Box,
@@ -10,44 +7,16 @@ import {
   TextField,
 } from '@mui/material';
 import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
-import { DateTime } from 'luxon';
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
 
-
-const chickenCounterSchema = yup.object({
-  timestamp: yup.date().required().default(() => DateTime.now()),
-  amount: yup.number().required().positive().integer().default(1)
-}).required();
 
 const AddChickenCount = () => {
-  const dispatch = useDispatch();
-  const [
-    addChickenCount, {isLoading, reset}
-  ] = useAddChickenCountMutation();
   const {
-    register, 
-    handleSubmit, 
-    reset: resetForm, 
-    formState: { errors }
-  } = useForm({
-    resolver: yupResolver(chickenCounterSchema)
-  });
-
-  const onSubmit = (data) => {
-    addChickenCount(data).then((response) => {
-      if (response.error) {
-        return;
-      }
-
-      reset();
-      resetForm();
-      dispatch(addAlert(recordAddedSuccessfully));
-    });
-  };
-
-  const handleDateTimeChange = () => {};
+    isLoading,
+    register,
+    handleSubmit,
+    errors,
+    onSubmit
+  } = useAddChickenCount();
 
   return (
     <Box 
@@ -67,7 +36,7 @@ const AddChickenCount = () => {
         label="Date-time"
         name="timestamp"
         readOnly
-        onChange={handleDateTimeChange}
+        disabled={isLoading}
         {...register("timestamp", {required: true})}
       />
       <TextField
@@ -84,6 +53,7 @@ const AddChickenCount = () => {
         error={errors.amount}
         helperText={errors.amount?.message}
         readOnly={isLoading}
+        disabled={isLoading}
       />
       <Grid 
         container
